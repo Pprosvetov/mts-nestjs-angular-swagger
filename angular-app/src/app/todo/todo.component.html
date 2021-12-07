@@ -18,7 +18,7 @@
   <li class="list-group-item d-flex justify-content-between" *ngFor="let todo of todoList; let index = index">
     {{todo.name}} <button type="button" (click)="removeTodo(todo._id, index)" class="btn btn-warning  btn-sm">Удалить</button>
   </li>
-  <li class="list-group-item list-group-item-secondary" *ngIf="!todoList.length && !isLoading">
+  <li class="list-group-item list-group-item-secondary" *ngIf="!todoList.length && !isLoading && !isError">
     Список задач пуст
   </li>
   <li class="list-group-item list-group-item-secondary" *ngIf="!isLoading && isError">

@@ -24,11 +24,7 @@ export class TodoController {
     @Body() CreateTodo: CreateTodoDto,
   ): Promise<TodoDto> {
     const todo: TodoDto = await this._todoService.createTodo(CreateTodo);
-    return res.status(HttpStatus.CREATED).json({
-      status: 201,
-      message: 'Successful!',
-      data: todo,
-    });
+    return res.status(HttpStatus.CREATED).json(todo);
   }
 
   @Get('/all')

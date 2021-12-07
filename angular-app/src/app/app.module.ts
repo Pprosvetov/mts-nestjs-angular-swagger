@@ -8,7 +8,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { TodoComponent } from './todo/todo.component';
-import { ApiModule } from './api';
+import { ApiModule, BASE_PATH } from './api';
 
 @NgModule({
   declarations: [
@@ -22,6 +22,12 @@ import { ApiModule } from './api';
     ReactiveFormsModule,
     NgbModule,
     ApiModule
+  ],
+  providers: [
+    {
+      provide: BASE_PATH,
+      useValue: 'http://localhost:3000'
+    }
   ],
   bootstrap: [AppComponent]
 })

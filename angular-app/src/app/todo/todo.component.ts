@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { TodoModel } from '../models/todo.model';
-import { TodoApiService } from '../services/todo-api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { TodoDto, TodoService } from '../api';
 
 @Component({
   selector: 'app-todo',
@@ -10,7 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class TodoComponent implements OnInit {
 
-  todoList: TodoModel[] = [];
+  todoList: TodoDto[] = [];
   formTodo: FormGroup;
   formError: boolean = false;
   isLoading = true;
@@ -18,7 +17,7 @@ export class TodoComponent implements OnInit {
 
   constructor(
     private _fb: FormBuilder,
-    private _todoApiService: TodoApiService
+    private _todoService: TodoService,
   ) {
     this.formTodo = this._fb.group({
       name: ['',
@@ -33,19 +32,19 @@ export class TodoComponent implements OnInit {
     this.isLoading = true;
     this.isError = false;
 
-    this._todoApiService.getTodoList().subscribe((todoList) => {
+    this._todoService.todoControllerGetAllTodos().subscribe((todoList) => {
       this.todoList = todoList;
       this.isLoading = false;
-    }, (error) => {
+    }, error => {
       this.isLoading = false;
       this.isError = true;
     })
   }
 
   removeTodo(id: string, index: number) {
-    this._todoApiService.deleteTodo(id).subscribe(() => {
+    this._todoService.todoControllerDeleteTodo(id).subscribe(() => {
       this.todoList.splice(index, 1);
-    })
+    });
   }
 
   submitForm() {
@@ -54,7 +53,7 @@ export class TodoComponent implements OnInit {
       this.formError = true;
       return;
     }
-    this._todoApiService.addTodo(this.formTodo.value).subscribe((newTodo) => {
+    this._todoService.todoControllerCreateTodo(this.formTodo.value).subscribe((newTodo) => {
       this.todoList.push(newTodo);
     })
     this.formTodo.patchValue({
