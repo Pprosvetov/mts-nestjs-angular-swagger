@@ -1,6 +1,6 @@
-import { Document } from "mongoose";
+import { Document } from 'mongoose';
 
-export class TodoDto extends Document  {
+export class TodoDto extends Document {
   _id: string;
   name: string;
 }

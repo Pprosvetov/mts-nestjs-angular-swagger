@@ -8,10 +8,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
 @Module({
-  imports: [
-    TodoModule,
-    MongooseModule.forRoot(environment.mongoUrl),
-  ],
+  imports: [TodoModule, MongooseModule.forRoot(environment.mongoUrl)],
   controllers: [AppController],
   providers: [AppService],
 })
