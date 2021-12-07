@@ -1,0 +1,30 @@
+<form [formGroup]="formTodo" (ngSubmit)="submitForm()" class="form-inline d-flex">
+  <div class="form-group mb-2 mr-2 flex-fill">
+    <label class="sr-only" for="inlineFormInput">Название задачи</label>
+    <input formControlName="name"
+           type="text"
+           class="form-control "
+           [class.is-invalid]="formError"
+           id="inlineFormInput"
+           placeholder="Введите название задачи">
+    <div id="validationServer03Feedback" class="invalid-feedback">
+      Введите значение
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary mb-2">Создать</button>
+</form>
+
+<ul class="list-group">
+  <li class="list-group-item d-flex justify-content-between" *ngFor="let todo of todoList; let index = index">
+    {{todo.name}} <button type="button" (click)="removeTodo(todo._id, index)" class="btn btn-warning  btn-sm">Удалить</button>
+  </li>
+  <li class="list-group-item list-group-item-secondary" *ngIf="!todoList.length && !isLoading">
+    Список задач пуст
+  </li>
+  <li class="list-group-item list-group-item-secondary" *ngIf="!isLoading && isError">
+    Ошибка
+  </li>
+  <li class="list-group-item list-group-item-secondary" *ngIf="isLoading">
+    Загрузка
+  </li>
+</ul>
