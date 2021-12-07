@@ -8,6 +8,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { TodoComponent } from './todo/todo.component';
+import { ApiModule } from './api';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { TodoComponent } from './todo/todo.component';
     BrowserModule,
     HttpClientModule,
     ReactiveFormsModule,
-    NgbModule
+    NgbModule,
+    ApiModule
   ],
   bootstrap: [AppComponent]
 })
